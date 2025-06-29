@@ -1,0 +1,12 @@
+copy: 复制
+download: 下载
+copied: 已复制!
+title: 扫描二维码
+tips: 要扫描此二维码，您可以使用手机上的二维码扫描器应用，也可以使用某些相机应用。或使用 Alt+Shift+Q 快捷键快速呼出。
+aria_close: 关闭
+aria_input_url_text: 要编码的URL或文本
+placeholder_input_url_text: 输入URL或文本
+error_init_failed: 二维码生成器初始化失败
+error_input_too_long: 输入内容过长，请将文本缩短至$1个字符以内。
+error_generate_failed: 无法生成二维码，请重试。
+shortcut_hint: 快捷键 Alt+Shift+Q

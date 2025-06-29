@@ -1,0 +1,12 @@
+copy: Copy
+copied: Copied!
+download: Download
+title: Scan QR Code
+tips: To scan this code, you can use a QR scanner app on your phone, or some camera apps. Or use Alt+Shift+Q shortcut to quickly open.
+aria_close: Close
+aria_input_url_text: URL or text to encode
+placeholder_input_url_text: Enter URL or text
+error_init_failed: Failed to initialize QR code generator
+error_input_too_long: Input is too long. Please shorten the text to $1 characters or less.
+error_generate_failed: Could not generate QR code. Please try again.
+shortcut_hint: Shortcut Alt+Shift+Q

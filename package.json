@@ -1,0 +1,54 @@
+{
+  "name": "next-qrcode-generator",
+  "description": "A addon to generate Chromium-style QR codes featuring the iconic Firefox logo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt -b firefox",
+    "build": "wxt build -b firefox",
+    "zip": "wxt zip -b firefox",
+    "compile": "tsc --noEmit",
+    "postinstall": "wxt prepare",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.7",
+    "@wxt-dev/i18n": "^0.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7",
+    "tw-animate-css": "^1.3.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@thedutchcoder/postcss-rem-to-px": "^0.0.2",
+    "@types/node": "^24.0.10",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@wxt-dev/module-react": "^1.1.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.13",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "wxt": "^0.20.7"
+  },
+  "engines": {
+    "pnpm": ">=10.12.4",
+    "node": ">=24.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/chromium-style-qrcode/next-qrcode-generator.git"
+  },
+  "packageManager": "pnpm@10.12.4",
+  "author": "liuliang@w3ctech.com",
+  "license": "MIT"
+}

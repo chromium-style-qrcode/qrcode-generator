@@ -1,0 +1,305 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Chromium-style colors - Light mode */
+  --chromium-text: #202124;
+  --chromium-secondary-text: #5f6368;
+  --chromium-border: #dadce0;
+  --chromium-error: #d93025;
+  --chromium-focus: #1a73e8;
+  --chromium-hover: #f8f9fa;
+  --chromium-active: #e8f0fe;
+  --chromium-tooltip: #dadce0;
+  --chromium-tooltip-hover: #c8c9ca;
+  --chromium-background: #ffffff;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+
+  /* Chromium-style colors - Dark mode */
+  --chromium-text: #e8eaed;
+  --chromium-secondary-text: #9aa0a6;
+  --chromium-border: #3c4043;
+  --chromium-error: #f28b82;
+  --chromium-focus: #8ab4f8;
+  --chromium-hover: #313235;
+  --chromium-active: #1a73e8;
+  --chromium-tooltip: #3c4043;
+  --chromium-tooltip-hover: #4f5155;
+  --chromium-background: #202124;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Chromium bubble exact replica styles */
+  .chromium-bubble {
+    --tw-shadow: 0 2px 10px var(--tw-shadow-color, rgba(0, 0, 0, 0.12));
+
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 13px;
+    color: var(--chromium-text);
+    background-color: var(--chromium-background);
+    box-shadow:
+      var(--tw-inset-shadow), var(--tw-inset-ring-shadow),
+      var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .chromium-title {
+    color: var(--chromium-text);
+    visibility: hidden;
+  }
+
+  /* Title bar exactly matching Chromium's bubble title bar */
+  .chromium-title-bar {
+    background-color: var(--chromium-background);
+  }
+
+  .chromium-close-button {
+    color: var(--chromium-secondary-text);
+    transition: all 0.15s ease;
+
+    &:active {
+      background-color: var(--chromium-active);
+    }
+
+    &:hover {
+      background-color: var(--chromium-hover);
+
+      @media (hover: hover) {
+        color: var(--chromium-text);
+        background-color: var(--chromium-hover);
+      }
+    }
+
+    &:focus {
+      --tw-ring-color: var(--chromium-focus);
+    }
+  }
+
+  .chromium-qr-container {
+    margin: 11px auto 15px; /* Add margins for bubble content */
+    width: 248px;
+    height: 248px;
+    border-radius: 8px;
+    border-color: var(--chromium-border);
+  }
+
+  .chromium-input {
+    height: 38px;
+    padding: 9px 9px 10px;
+    border-radius: 4px;
+    color: var(--chromium-text);
+    border-color: var(--chromium-border);
+    background-color: var(--chromium-background);
+
+    &:focus {
+      --tw-shadow: 0 0 0 1px var(--tw-shadow-color, var(--chromium-focus));
+
+      border-color: var(--chromium-focus);
+      box-shadow:
+        var(--tw-inset-shadow), var(--tw-inset-ring-shadow),
+        var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+
+  .chromium-input-container,
+  .chromium-error-container {
+    margin: 0 auto;
+  }
+
+  .chromium-input-container,
+  .chromium-button-container,
+  .chromium-error-container {
+    width: 282px;
+  }
+
+  .chromium-error-container {
+    transition: all 0.2s ease;
+  }
+
+  .chromium-error-container.show-error {
+    margin-bottom: 16px;
+  }
+
+  .chromium-error-container.hide-error {
+    margin-bottom: 0;
+  }
+
+  .chromium-error-text {
+    font-size: 12px;
+    color: var(--chromium-error);
+  }
+
+  .chromium-button-container {
+    margin: 0 auto 16px; /* Add bottom margin */
+  }
+
+  .chromium-button-container.with-error {
+    margin-top: 0;
+  }
+
+  .chromium-button-container.without-error {
+    margin-top: 23px;
+  }
+
+  .chromium-tooltip-icon {
+    margin-left: 6px;
+    width: 14px;
+    height: 14px;
+    color: var(--chromium-secondary-text);
+
+    &:hover {
+      @media (hover: hover) {
+        color: #3c4043;
+      }
+    }
+  }
+
+  .chromium-tooltip-content {
+    max-width: 296px;
+  }
+
+  .chromium-button {
+    font-size: 13px;
+    color: var(--chromium-focus);
+    border-color: var(--chromium-border);
+    background-color: var(--chromium-background);
+
+    &:active {
+      background-color: var(--chromium-active);
+    }
+
+    &:disabled {
+      color: var(--chromium-secondary-text);
+      opacity: 0.38;
+    }
+
+    &:hover {
+      @media (hover: hover) {
+        --tw-shadow: 0 1px 2px var(--tw-shadow-color, rgba(0, 0, 0, 0.15));
+
+        box-shadow:
+          var(--tw-inset-shadow), var(--tw-inset-ring-shadow),
+          var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+        background-color: var(--chromium-hover);
+      }
+    }
+  }
+}

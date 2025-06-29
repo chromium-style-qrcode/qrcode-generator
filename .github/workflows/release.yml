@@ -1,0 +1,147 @@
+name: Release Extension
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+permissions:
+  contents: write
+
+env:
+  NODE_VERSION: "24.3.0"
+  PNPM_VERSION: "10.12.4"
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build extension for Firefox
+        run: pnpm build
+
+      - name: Create zip files
+        run: pnpm zip
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          echo "version=$TAG" >> $GITHUB_OUTPUT
+          echo "is_prerelease=$([[ $TAG =~ -(alpha|beta|rc) ]] && echo "true" || echo "false")" >> $GITHUB_OUTPUT
+
+      - name: Upload Firefox extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox-extension
+          path: |
+            .output/next-qrcode-generator-${{ steps.version.outputs.version }}.zip
+            .output/next-qrcode-generator-${{ steps.version.outputs.version }}-sources.zip
+          retention-days: 1
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ steps.version.outputs.version }}${{ steps.version.outputs.is_prerelease == 'true' && ' (Unlisted)' || '' }}
+          draft: false
+          prerelease: ${{ steps.version.outputs.is_prerelease }}
+          files: |
+            .output/next-qrcode-generator-${{ steps.version.outputs.version }}.zip
+            .output/next-qrcode-generator-${{ steps.version.outputs.version }}-sources.zip
+          body: |
+            ## Release ${{ steps.version.outputs.version }}${{ steps.version.outputs.is_prerelease == 'true' && ' (Unlisted)' || '' }}
+
+            ${{ steps.version.outputs.is_prerelease == 'true' && '> Firefox build for this prerelease is submitted as Unlisted on AMO.' || '' }}
+
+            ### 📦 Downloads
+            - **Firefox Extension**: Download the Firefox zip file below
+
+            ### 📥 Installation
+            1. Download the appropriate zip file for your browser
+            2. Extract the zip file
+            3. Load the extension in your browser's developer mode
+
+  publish-firefox-store:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.ref, 'alpha') && !contains(github.ref, 'beta') && !contains(github.ref, 'rc') }}
+
+    steps:
+      - name: Download Firefox extension artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: firefox-extension
+          path: ./
+
+      - name: Extract version from tag
+        id: version_firefox
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          echo "version=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Publish to Firefox Add-ons
+        uses: trmcnvn/firefox-addon@v1
+        with:
+          uuid: ${{ secrets.FIREFOX_ADDON_ID }}
+          xpi: next-qrcode-generator-${{ steps.version_firefox.outputs.version }}.zip
+          src: next-qrcode-generator-${{ steps.version_firefox.outputs.version }}-sources.zip
+          channel: listed
+          issuer: ${{ secrets.FIREFOX_AMO_ISSUER }}
+          secret: ${{ secrets.FIREFOX_AMO_SECRET }}
+
+  publish-firefox-store-unlisted:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
+
+    steps:
+      - name: Download Firefox extension artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: firefox-extension
+          path: ./
+
+      - name: Extract version from tag
+        id: version_firefox_unlisted
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          echo "version=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Publish to Firefox Add-ons (unlisted)
+        uses: trmcnvn/firefox-addon@v1
+        with:
+          uuid: ${{ secrets.FIREFOX_ADDON_ID }}
+          xpi: next-qrcode-generator-${{ steps.version_firefox_unlisted.outputs.version }}.zip
+          src: next-qrcode-generator-${{ steps.version_firefox_unlisted.outputs.version }}-sources.zip
+          channel: unlisted
+          issuer: ${{ secrets.FIREFOX_AMO_ISSUER }}
+          secret: ${{ secrets.FIREFOX_AMO_SECRET }}

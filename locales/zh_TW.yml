@@ -1,0 +1,12 @@
+copy: 復製
+download: 下載
+copied: 已復製!
+title: 掃描二維碼
+tips: 要掃描此二維碼，您可以使用手機上的二維碼掃描器應用，也可以使用某些相機應用。或使用 Alt+Shift+Q 快捷鍵快速呼出。
+aria_close: 關閉
+aria_input_url_text: 要編碼的URL或文字
+placeholder_input_url_text: 輸入URL或文字
+error_init_failed: 二維碼產生器初始化失敗
+error_input_too_long: 輸入內容過長，請將文字縮短至$1個字元以內。
+error_generate_failed: 無法產生二維碼，請重試。
+shortcut_hint: 快捷鍵 Alt+Shift+Q
