@@ -86,6 +86,12 @@ pnpm compile
 
 # 代码格式化
 pnpm format
+
+# 依据 Conventional Commits 生成/更新 CHANGELOG.md（最近变更）
+pnpm changelog
+
+# 初次生成（覆盖式，包含所有历史）
+pnpm changelog:init
 ```
 
 ### 项目结构

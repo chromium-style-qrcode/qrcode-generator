@@ -86,6 +86,12 @@ pnpm compile
 
 # Format code
 pnpm format
+
+# Generate/update CHANGELOG.md from Conventional Commits (latest changes)
+pnpm changelog
+
+# Initialize (regenerate for all history)
+pnpm changelog:init
 ```
 
 ### Project Structure
