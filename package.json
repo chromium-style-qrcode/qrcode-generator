@@ -2,7 +2,7 @@
   "name": "next-qrcode-generator",
   "description": "A addon to generate Chromium-style QR codes featuring the iconic Firefox logo",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "wxt -b firefox",
