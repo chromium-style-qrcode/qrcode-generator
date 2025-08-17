@@ -41,7 +41,7 @@ export default defineConfig({
     assetsInclude: ['**/*.wasm']
   }),
   zip: {
-    artifactTemplate: '{{name}}-{{packageVersion}}-{{browser}}.zip',
-    sourcesTemplate: '{{name}}-{{packageVersion}}-{{browser}}-sources.zip'
+    artifactTemplate: '{{name}}-{{packageVersion}}.zip',
+    sourcesTemplate: '{{name}}-{{packageVersion}}-sources.zip'
   }
 })
