@@ -108,15 +108,18 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           echo "version=$TAG" >> $GITHUB_OUTPUT
 
+      - name: Extract manifest from zip
+        run: |
+          unzip -j next-qrcode-generator-${{ steps.version_firefox.outputs.version }}.zip manifest.json
+
       - name: Publish to Firefox Add-ons
         uses: trmcnvn/firefox-addon@v1
         with:
           uuid: ${{ secrets.FIREFOX_ADDON_ID }}
           xpi: next-qrcode-generator-${{ steps.version_firefox.outputs.version }}.zip
-          src: next-qrcode-generator-${{ steps.version_firefox.outputs.version }}-sources.zip
-          channel: listed
-          issuer: ${{ secrets.FIREFOX_AMO_ISSUER }}
-          secret: ${{ secrets.FIREFOX_AMO_SECRET }}
+          manifest: manifest.json
+          api-key: ${{ secrets.FIREFOX_AMO_ISSUER }}
+          api-secret: ${{ secrets.FIREFOX_AMO_SECRET }}
 
   publish-firefox-store-unlisted:
     needs: build-and-release
@@ -136,12 +139,15 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           echo "version=$TAG" >> $GITHUB_OUTPUT
 
+      - name: Extract manifest from zip
+        run: |
+          unzip -j next-qrcode-generator-${{ steps.version_firefox_unlisted.outputs.version }}.zip manifest.json
+
       - name: Publish to Firefox Add-ons (unlisted)
         uses: trmcnvn/firefox-addon@v1
         with:
           uuid: ${{ secrets.FIREFOX_ADDON_ID }}
           xpi: next-qrcode-generator-${{ steps.version_firefox_unlisted.outputs.version }}.zip
-          src: next-qrcode-generator-${{ steps.version_firefox_unlisted.outputs.version }}-sources.zip
-          channel: unlisted
-          issuer: ${{ secrets.FIREFOX_AMO_ISSUER }}
-          secret: ${{ secrets.FIREFOX_AMO_SECRET }}
+          manifest: manifest.json
+          api-key: ${{ secrets.FIREFOX_AMO_ISSUER }}
+          api-secret: ${{ secrets.FIREFOX_AMO_SECRET }}
