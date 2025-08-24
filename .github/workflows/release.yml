@@ -120,34 +120,3 @@ jobs:
           manifest: manifest.json
           api-key: ${{ secrets.FIREFOX_AMO_ISSUER }}
           api-secret: ${{ secrets.FIREFOX_AMO_SECRET }}
-
-  publish-firefox-store-unlisted:
-    needs: build-and-release
-    runs-on: ubuntu-latest
-    if: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
-
-    steps:
-      - name: Download Firefox extension artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: firefox-extension
-          path: ./
-
-      - name: Extract version from tag
-        id: version_firefox_unlisted
-        run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          echo "version=$TAG" >> $GITHUB_OUTPUT
-
-      - name: Extract manifest from zip
-        run: |
-          unzip -j next-qrcode-generator-${{ steps.version_firefox_unlisted.outputs.version }}.zip manifest.json
-
-      - name: Publish to Firefox Add-ons (unlisted)
-        uses: trmcnvn/firefox-addon@v1
-        with:
-          uuid: ${{ secrets.FIREFOX_ADDON_ID }}
-          xpi: next-qrcode-generator-${{ steps.version_firefox_unlisted.outputs.version }}.zip
-          manifest: manifest.json
-          api-key: ${{ secrets.FIREFOX_AMO_ISSUER }}
-          api-secret: ${{ secrets.FIREFOX_AMO_SECRET }}
