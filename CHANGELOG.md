@@ -1,3 +1,9 @@
+## [1.0.1-alpha.1](https://github.com/chromium-style-qrcode/next-qrcode-generator/compare/1.0.1-alpha.0...1.0.1-alpha.1) (2025-08-24)
+
+### Bug Fixes
+
+- correct Firefox addon action parameters in release workflow ([3e8b6a5](https://github.com/chromium-style-qrcode/next-qrcode-generator/commit/3e8b6a58da4cda528db112a5e89c57a468d883d0))
+
 ## [1.0.1-alpha.0](https://github.com/chromium-style-qrcode/next-qrcode-generator/compare/1.0.0...1.0.1-alpha.0) (2025-08-24)
 
 ### Bug Fixes
