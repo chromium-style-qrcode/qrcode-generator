@@ -48,10 +48,13 @@ You can install the extension directly from the [Firefox Add-ons Store](https://
 ## 🎯 Usage
 
 1. **Access the Extension**: Click the QR code icon in your browser's toolbar
-2. **Auto-Fill Current URL**: The extension automatically loads the current page's URL
-3. **Custom Text**: Replace the URL with any text you want to convert to a QR code
-4. **Copy to Clipboard**: Click the "Copy" button to copy the QR code as an image
-5. **Download**: Click "Download" to save the QR code as a PNG file
+2. **Shortcut Access**: Use the shortcut `Alt+Shift+Q` (Windows/Linux) or `⌥⇧Q` (Mac) to quickly open the extension
+3. **Auto-Fill Current URL**: The extension automatically loads the current page's URL
+4. **Custom Text**: Replace the URL with any text you want to convert to a QR code
+5. **Copy to Clipboard**: Click the "Copy" button to copy the QR code as an image
+6. **Download**: Click "Download" to save the QR code as a PNG file
+
+> **Note**: If the shortcut does not work in Firefox, go to `about:addons` → Click the gear icon in the top right → "Manage Extension Shortcuts" to check or reconfigure the shortcut.
 
 ## 🛠️ Technology Stack
 

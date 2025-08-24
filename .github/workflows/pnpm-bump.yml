@@ -1,0 +1,69 @@
+name: Scheduled pnpm packageManager bump
+
+on:
+  schedule:
+    # 23:59 Asia/Shanghai = 15:59 UTC
+    - cron: "59 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  NODE_VERSION: "24.3.0"
+
+jobs:
+  bump:
+    name: Bump pnpm in packageManager
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Read current pnpm version from package.json
+        id: readpm
+        run: |
+          current=$(jq -r '.packageManager' package.json | awk -F'@' '{print $2}')
+          echo "current=$current" >> $GITHUB_OUTPUT
+
+      - name: Get latest pnpm version
+        id: latestpm
+        run: |
+          latest=$(npm view pnpm version)
+          echo "latest=$latest" >> $GITHUB_OUTPUT
+
+      - name: Update package.json if needed
+        id: updatepkg
+        run: |
+          current='${{ steps.readpm.outputs.current }}'
+          latest='${{ steps.latestpm.outputs.latest }}'
+          echo "Current pnpm: $current, Latest pnpm: $latest"
+          if [ "$current" != "$latest" ]; then
+            tmp=$(mktemp)
+            jq ".packageManager=\"pnpm@$latest\"" package.json > "$tmp" && mv "$tmp" package.json
+            echo "updated=true" >> $GITHUB_OUTPUT
+          else
+            echo "updated=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.updatepkg.outputs.updated == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/bump-pnpm
+          commit-message: "chore(deps): bump pnpm to ${{ steps.latestpm.outputs.latest }}"
+          title: "chore(deps): bump pnpm to ${{ steps.latestpm.outputs.latest }}"
+          body: |
+            This PR updates the packageManager field in package.json to pnpm@${{ steps.latestpm.outputs.latest }}.
+          labels: dependencies
+
+      - name: No changes
+        if: steps.updatepkg.outputs.updated != 'true'
+        run: echo "pnpm packageManager already up-to-date."

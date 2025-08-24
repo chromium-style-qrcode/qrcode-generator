@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useMemo, useState, useEffect, useCallback } from 'react'
 import { i18n } from '#i18n'
 
 import { loadWasmModule, type WasmQRGenerator } from '../lib/wasm-loader'
@@ -315,7 +315,12 @@ export const useQRCode = (): [QRCodeState, QRCodeActions] => {
     setState((prev) => ({ ...prev, error: null, errorType: null }))
   }, [])
 
-  return [state, { clearError, copyQRCode, generateQRCode, downloadQRCode }]
+  const actions = useMemo(
+    () => ({ clearError, copyQRCode, generateQRCode, downloadQRCode }),
+    [clearError, copyQRCode, generateQRCode, downloadQRCode]
+  )
+
+  return [state, actions]
 }
 
 // Helper function to check if a module position is part of a locator pattern

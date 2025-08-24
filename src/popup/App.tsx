@@ -37,14 +37,14 @@ function App() {
     }, 50) // Delay to ensure title is visible after initial render
   }, [])
 
-  // Generate QR code when input changes
+  // Generate QR code when input changes or configuration changes
   useEffect(() => {
     const timer = setTimeout(() => {
       qrActions.generateQRCode(inputValue)
     }, 300) // Debounce input
 
     return () => clearTimeout(timer)
-  }, [inputValue, qrActions])
+  }, [inputValue, qrActions.generateQRCode])
 
   const handleCopy = async () => {
     if (qrState.qrData) {

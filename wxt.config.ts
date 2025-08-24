@@ -1,19 +1,27 @@
 import { defineConfig } from 'wxt'
+import { config } from 'dotenv'
+
+// Load environment variables
+config()
+
+if (!process.env.VITE_QRCODE_SHORTCUT) {
+  console.warn('⚠️  VITE_QRCODE_SHORTCUT not set')
+}
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
   manifest: {
     default_locale: 'en',
-    permissions: ['activeTab'],
+    permissions: ['activeTab', 'storage'],
     action: { default_popup: 'popup/index.html' },
     name: 'Next QR Code Generator',
     description:
       'A addon to generate Chromium-style QR codes featuring the iconic Firefox logo',
     commands: {
-      'show-qrcode': {
+      _execute_browser_action: {
         suggested_key: {
-          default: 'Alt+Shift+Q',
-          mac: 'Alt+Shift+Q'
+          mac: process.env.VITE_QRCODE_SHORTCUT,
+          default: process.env.VITE_QRCODE_SHORTCUT
         },
         description: 'Show QR code for current page'
       }
