@@ -1,3 +1,7 @@
+## [1.0.1](https://github.com/chromium-style-qrcode/next-qrcode-generator/compare/1.0.1-alpha.2...1.0.1) (2025-08-24)
+
+## [1.0.1-alpha.2](https://github.com/chromium-style-qrcode/next-qrcode-generator/compare/1.0.1-alpha.1...1.0.1-alpha.2) (2025-08-24)
+
 ## [1.0.1-alpha.1](https://github.com/chromium-style-qrcode/next-qrcode-generator/compare/1.0.1-alpha.0...1.0.1-alpha.1) (2025-08-24)
 
 ### Bug Fixes
