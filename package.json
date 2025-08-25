@@ -51,7 +51,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/chromium-style-qrcode/next-qrcode-generator.git"
   },
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@10.15.0",
   "author": "liuliang@w3ctech.com",
   "license": "MIT"
 }
